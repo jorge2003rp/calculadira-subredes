@@ -1,0 +1,10 @@
+{
+  "name": "calculadora-subredes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculadora de subredes IPv4 (HTML, CSS y JavaScript, sin librerías externas).",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

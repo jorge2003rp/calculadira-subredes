@@ -19,6 +19,9 @@ function parseIPv4(text) {
   for (const part of parts) {
     // Solo dígitos, entre 1 y 3 caracteres
     if (!/^\d{1,3}$/.test(part)) return null;
+    // Sin ceros a la izquierda ("01" es ambiguo: algunos sistemas lo leen
+    // como octal, así que mejor exigir la forma decimal normal).
+    if (part.length > 1 && part[0] === "0") return null;
     const n = Number(part);
     if (n > 255) return null;
     value = value * 256 + n; // desplaza 8 bits y añade el octeto
@@ -33,8 +36,8 @@ function parseIPv4(text) {
 function parseMask(text) {
   const clean = text.trim().replace(/^\//, "");
 
-  // Caso 1: prefijo numérico (24)
-  if (/^\d{1,2}$/.test(clean)) {
+  // Caso 1: prefijo numérico (24, o con ceros delante como 032)
+  if (/^\d{1,3}$/.test(clean)) {
     const prefix = Number(clean);
     return prefix <= 32 ? prefix : null;
   }

@@ -35,14 +35,31 @@ Con la demo online no hace falta instalar nada. Para ejecutarlo en local:
 
 ```
 calculadora-subredes/
-├── index.html   # Estructura de la página
-├── style.css    # Estilos
-├── subnet.js    # Lógica del cálculo (independiente de la página)
-├── app.js       # Conecta el formulario con la lógica y pinta el resultado
+├── index.html      # Estructura de la página
+├── style.css       # Estilos
+├── subnet.js       # Lógica del cálculo (independiente de la página)
+├── subnet.test.js  # Tests automáticos de subnet.js
+├── app.js          # Conecta el formulario con la lógica y pinta el resultado
+├── package.json    # Script "test" para ejecutar los tests con npm
+├── LICENSE         # Licencia MIT
 └── README.md
 ```
 
 La lógica está separada de la interfaz a propósito: `subnet.js` no toca la página, por lo que se puede probar por separado (por ejemplo con Node.js).
+
+## Tests
+
+`subnet.js` tiene tests automáticos escritos con el runner de tests que trae Node.js de serie (sin dependencias externas). Para ejecutarlos:
+
+```
+node --test
+```
+
+o, si prefieres usar npm:
+
+```
+npm test
+```
 
 ## Cómo funciona
 
@@ -55,7 +72,6 @@ Una dirección IPv4 son 32 bits, así que el programa la guarda como un número 
 
 ## Qué aprendí
 
-<!-- Revisa este apartado y déjalo solo con lo que sea cierto en tu caso -->
 - Cómo se relacionan la IP, la máscara y el prefijo, y cómo se calcula cada dirección de la subred con operaciones a nivel de bit.
 - Que en JavaScript las operaciones de bits trabajan con enteros de 32 bits con signo, y que hay que usar `>>> 0` para obtener el valor sin signo.
 - Casos límite del subnetting: `/0`, `/31` y `/32`.
@@ -66,4 +82,7 @@ Una dirección IPv4 son 32 bits, así que el programa la guarda como un número 
 - Soporte para IPv6
 - Calcular varias subredes a partir de una red mayor (VLSM)
 - Botón para copiar los resultados
-- Tests automáticos para `subnet.js`
+
+## Licencia
+
+MIT. Consulta el archivo [LICENSE](LICENSE).
