@@ -1,0 +1,290 @@
+/* Paleta: gris azulado claro, tinta azul marino y dos colores con significado:
+   azul = bits de red, ámbar = bits de equipos. */
+:root {
+  --paper: #eef2f7;
+  --surface: #ffffff;
+  --ink: #16202e;
+  --muted: #566377;
+  --line: #d3dbe6;
+  --accent: #174eb0;
+  --accent-ink: #ffffff;
+
+  --net: #174eb0;
+  --net-bg: #dbe7fb;
+  --host: #8a4700;
+  --host-bg: #fbe6c8;
+
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.intro p {
+  margin: 0 0 1.75rem;
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.mono { font-family: var(--mono); }
+
+/* ---------- Formulario ---------- */
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.help {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+button[type="submit"] {
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover { background: #123d8c; }
+
+@media (min-width: 40rem) {
+  form {
+    grid-template-columns: 1.3fr 1fr auto;
+    align-items: start;
+  }
+  button[type="submit"] { margin-top: 1.85rem; }
+}
+
+/* ---------- Ejemplos ---------- */
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.example {
+  padding: 0.3rem 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.example:hover { background: var(--surface); border-color: var(--accent); }
+
+/* ---------- Errores y avisos ---------- */
+.error,
+.warning {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: #7a1420;
+  background: #fbe3e5;
+  border: 1px solid #efb5bb;
+}
+
+.warning {
+  margin: 0 0 1.25rem;
+  color: var(--host);
+  background: var(--host-bg);
+  border: 1px solid #efc98f;
+}
+
+/* ---------- Resultado ---------- */
+.result { margin-top: 1.75rem; }
+
+.bits-block {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.bits-row + .bits-row { margin-top: 1rem; }
+
+.bits-label {
+  margin: 0 0 0.4rem;
+  font-weight: 500;
+}
+
+.bits-label .mono {
+  margin-left: 0.5rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.bits {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.octet {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.bit {
+  flex: 1;
+  min-width: 0;
+  padding: 0.35rem 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: clamp(0.72rem, 3.1vw, 1.05rem);
+}
+
+/* Los bits de red van en negrita y los de equipos en normal:
+   así se distinguen aunque no se vean bien los colores. */
+.bit.net  { color: var(--net);  background: var(--net-bg);  font-weight: 600; }
+.bit.host { color: var(--host); background: var(--host-bg); font-weight: 400; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+  margin: 1.1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+}
+
+.swatch.net  { background: var(--net-bg);  border: 1px solid var(--net); }
+.swatch.host { background: var(--host-bg); border: 1px solid var(--host); }
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.legend strong { color: var(--ink); }
+
+/* Lista de valores */
+.values {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 1.25rem 0 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.item {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.item:last-child { border-bottom: 0; }
+
+.item dt {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.item dd {
+  margin: 0.1rem 0 0;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 40rem) {
+  .values { grid-template-columns: 1fr 1fr; }
+  .item:nth-child(odd) { border-right: 1px solid var(--line); }
+  .item:nth-last-child(-n + 2):nth-child(odd) { border-bottom: 0; }
+  .item:last-child { grid-column: 1 / -1; border-right: 0; }
+  .item:nth-last-child(2):nth-child(even) { border-bottom: 1px solid var(--line); }
+}
+
+footer {
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+footer p { margin: 0; }

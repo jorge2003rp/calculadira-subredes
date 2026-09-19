@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de subredes IPv4</title>
+  <meta name="description" content="Calcula la dirección de red, el broadcast y el número de equipos de una subred IPv4, y mira en binario qué bits son de red y cuáles de equipos.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <h1>Calculadora de subredes IPv4</h1>
+      <p>Escribe una dirección IP y su máscara. Verás la red, el broadcast y cuántos equipos caben, y en binario qué bits pertenecen a la red y cuáles a los equipos.</p>
+    </header>
+
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="ip">Dirección IP</label>
+        <input id="ip" name="ip" type="text" value="192.168.1.10" inputmode="decimal" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="mask">Máscara o prefijo</label>
+        <input id="mask" name="mask" type="text" value="/24" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="mask-help">
+        <p id="mask-help" class="help">Acepta /24, 24 o 255.255.255.0</p>
+      </div>
+      <button type="submit">Calcular</button>
+    </form>
+
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <div class="examples">
+      <span>Prueba con:</span>
+      <button type="button" class="example" data-ip="192.168.1.10" data-mask="/24">192.168.1.10/24</button>
+      <button type="button" class="example" data-ip="172.16.5.4" data-mask="255.255.240.0">172.16.5.4 con 255.255.240.0</button>
+      <button type="button" class="example" data-ip="10.0.0.5" data-mask="/8">10.0.0.5/8</button>
+      <button type="button" class="example" data-ip="10.1.1.1" data-mask="/30">10.1.1.1/30</button>
+    </div>
+
+    <section id="result" class="result" aria-live="polite" hidden>
+      <p id="warning" class="warning" hidden></p>
+
+      <div class="bits-block">
+        <h2>Así se reparten los 32 bits</h2>
+
+        <div class="bits-row">
+          <p class="bits-label">Dirección IP <span id="ip-dotted" class="mono"></span></p>
+          <div id="ip-bits" class="bits" role="img" aria-label="Dirección IP en binario"></div>
+        </div>
+
+        <div class="bits-row">
+          <p class="bits-label">Máscara <span id="mask-dotted-label" class="mono"></span></p>
+          <div id="mask-bits" class="bits" role="img" aria-label="Máscara en binario"></div>
+        </div>
+
+        <p class="legend">
+          <span class="legend-item"><span class="swatch net"></span> Bits de red: <strong id="net-count"></strong></span>
+          <span class="legend-item"><span class="swatch host"></span> Bits de equipos: <strong id="host-count"></strong></span>
+        </p>
+      </div>
+
+      <dl class="values">
+        <div class="item"><dt>Dirección de red</dt><dd id="r-network"></dd></div>
+        <div class="item"><dt>Broadcast</dt><dd id="r-broadcast"></dd></div>
+        <div class="item"><dt>Máscara de subred</dt><dd id="r-mask"></dd></div>
+        <div class="item"><dt>Máscara wildcard</dt><dd id="r-wildcard"></dd></div>
+        <div class="item"><dt>Primer equipo</dt><dd id="r-first"></dd></div>
+        <div class="item"><dt>Último equipo</dt><dd id="r-last"></dd></div>
+        <div class="item"><dt>Equipos por subred</dt><dd id="r-hosts"></dd></div>
+        <div class="item"><dt>Tipo de dirección</dt><dd id="r-type"></dd></div>
+        <div class="item"><dt>Clase histórica</dt><dd id="r-class"></dd></div>
+      </dl>
+    </section>
+
+    <footer>
+      <p>Proyecto personal de redes hecho con HTML, CSS y JavaScript, sin librerías externas.</p>
+    </footer>
+  </main>
+
+  <script src="subnet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
