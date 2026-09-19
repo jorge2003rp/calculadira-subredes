@@ -4,7 +4,7 @@ Aplicación web que calcula los datos de una subred a partir de una dirección I
 
 ## Demo
 
-[https://TU-USUARIO.github.io/calculadora-subredes](https://jorge2003rp.github.io/calculadora-subredes)
+[https://jorge2003rp.github.io/calculadora-subredes](https://jorge2003rp.github.io/calculadora-subredes)
 
 ## Qué calcula
 
@@ -28,7 +28,7 @@ HTML, CSS y JavaScript, sin librerías externas.
 
 Con la demo online no hace falta instalar nada. Para ejecutarlo en local:
 
-1. Clona el repositorio: `git clone https://github.com/TU-USUARIO/calculadora-subredes.git`
+1. Clona el repositorio: `git clone https://github.com/jorge2003rp/calculadora-subredes.git`
 2. Abre `index.html` en el navegador.
 
 ## Estructura
